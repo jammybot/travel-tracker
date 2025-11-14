@@ -1,25 +1,38 @@
 import { openDatabase } from "./db.js";
-import 'log-timestamp'; 
+import 'log-timestamp';
+import express from 'express'; 
 
-//requiring the sqlite3 module
-async function connectDB () {
-    const db = openDatabase();
+//Intialising the SQL database
+const db = openDatabase();
 
-    const createTableSql = `CREATE TABLE IF NOT EXISTS trips (
-                            id INTEGER PRIMARY KEY, 
-                            city TEXT,
-                            country TEXT,
-                            date TEXT,
-                            notes TEXT,
-                            rating INTEGER)`;
+const createTableSql = `CREATE TABLE IF NOT EXISTS trips (
+                        id INTEGER PRIMARY KEY, 
+                        city TEXT,
+                        country TEXT,
+                        date TEXT,
+                        notes TEXT,
+                        rating INTEGER)`;
 
-    db.run(createTableSql, (err) => {
-        if (err) {
-            return console.error('Database', err.message);
-        }
-        else console.log("Connected to trips database successfully.");
-    });
-}
+db.run(createTableSql, (err) => {
+    if (err) {
+        return console.error('Error creating table: ', err.message);
+    }
+    else console.log("Created table successfully.");
+});
 
-connectDB()
+// Routes and express server
 
+const app = express();
+
+app.use(express.json());
+
+app.get('/status', (req, res) => {
+  res.json({
+    status: 'Running',
+    timestamp: new Date().toISOString()
+  });
+  console.log('Someone pinged')
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
