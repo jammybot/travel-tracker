@@ -3,7 +3,7 @@ import 'log-timestamp';
 
 //requiring the sqlite3 module
 async function connectDB () {
-    const db = await openDatabase();
+    const db = openDatabase();
 
     const createTableSql = `CREATE TABLE IF NOT EXISTS trips (
                             id INTEGER PRIMARY KEY, 
@@ -15,9 +15,9 @@ async function connectDB () {
 
     db.run(createTableSql, (err) => {
         if (err) {
-            return console.error('Error creating table:', err.message);
+            return console.error('Database', err.message);
         }
-        console.log("Connected to trips database successfully.");
+        else console.log("Connected to trips database successfully.");
     });
 }
 
