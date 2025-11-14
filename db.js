@@ -11,5 +11,3 @@ export function openDatabase() {
         );
     return db;
 }
-
-// module.exports = { openDatabase };
