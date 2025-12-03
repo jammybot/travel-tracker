@@ -20,8 +20,10 @@
   "homepage": "https://github.com/jammybot/travel-tracker#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "create-vite": "^8.1.0",
     "express": "^5.1.0",
     "log-timestamp": "^0.3.0",
+    "react-router-dom": "^7.9.6",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"
   }
